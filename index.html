@@ -53,11 +53,26 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
       margin-right: 5%;
     }
 
-    #top-stuff {
-      background-color: rgb(200, 25, 25);
+    #top-wrapper {
+      background-color: rgb(200, 150, 150);
       border-style: solid;
-      display: inline-block;
       margin: 5%;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    #top-left-stuff {
+      float: left;
+      line-height: 25px;
+    }
+
+    #top-right-stuff {
+      float: right;
+    }
+
+    #top-right-stuff img {
+      width: 15px;
+      height: 15px;
     }
 
     #bottom-stuff {
@@ -73,9 +88,16 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
   </style>
 
   <div id="div-playback-area">
-    <div id="top-stuff">
-      <p>BPM: 120</p>
-      <button>hello</button>
+    <div id="top-wrapper">
+      <div id="top-left-stuff">
+        <span>BPM: 120</span>
+      </div>
+
+      <div id="top-right-stuff">
+        <button>Reset</button>
+        <img src="images/play_button.png"></img>
+        <img src="images/stop_button.png"></img>
+      </div>
     </div>
 
     <div id="bottom-stuff">
