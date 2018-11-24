@@ -8,10 +8,10 @@ var cNote = new Audio("");
 
 var keyController = (function() {
 
-  //Create HTML key image objects and give them a click listener
+  //Create HTML key image objects and give them listeners
   function generateKeys() {
     createKeyObjects();
-    assignKeysMouseDownListeners();
+    assignKeysAllListeners();
   }
 
   //Creates the HTML image objects and pushes them to the correct div
@@ -27,19 +27,26 @@ var keyController = (function() {
   }
 
   //Gives all keys a click listener which plays their note on click
-  function assignKeysMouseDownListeners() {
+  function assignKeysAllListeners() {
     for (var i = 0; i < keyHTMLObjects.length; i++) {
       keyHTMLObjects[i].addEventListener('mousedown', playNote);
+      keyHTMLObjects[i].addEventListener('mouseup', resetKeyImage);
+      keyHTMLObjects[i].addEventListener('mouseleave', resetKeyImage);
     }
   }
 
   //Play note assigned to key
   function playNote(event) {
+    event.target.setAttribute("src", "images/test_piano_key_pressed.png");
     var p = event.target.parentElement;
     var index = Array.prototype.indexOf.call(p.children, event.target);
     console.log(keyNotes[index]);
     var sound = new Audio("sounds/" + keyNotes[index] + ".mp3")
     sound.play();
+  }
+
+  function resetKeyImage(event) {
+    event.target.setAttribute("src", "images/test_piano_key.png");
   }
 
   return {
