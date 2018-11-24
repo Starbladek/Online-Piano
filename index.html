@@ -8,15 +8,36 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-  <head>
-    <meta charset="utf-8">
-    <title>Online Piano</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="stylesheets/styles.css">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>Online Piano</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link rel="stylesheet" href="stylesheets/styles.css">
 
-  <body>
-    <h1>Online Piano</h1>
-  </body>
+  <script src="javascript/model/KeyModel.js"></script>
+  <script src="javascript/control/KeyController.js"></script>
+</head>
+
+<body onload="keyController.generateKeys()">
+  <h1>Online Piano</h1>
+
+  <!-- Piano key area -->
+  <style>
+    #div-piano-key-area {
+      background-color: rgb(200, 200, 200);
+      border-style: solid;
+      margin: 50px 50px;
+      text-align: center;
+    }
+  </style>
+
+  <div id="div-piano-key-area">
+    <!--
+    <img class="key-class" src="images/test_piano_key.png" alt="Key1">
+    <img class="key-class" src="images/test_piano_key.png" alt="Key2">
+    <img class="key-class" src="images/test_piano_key.png" alt="Key3">
+    -->
+  </div>
+</body>
 
 </html>
