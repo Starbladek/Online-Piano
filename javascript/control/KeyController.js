@@ -21,7 +21,7 @@ var keyController = (function() {
       keyImage.setAttribute("class", "key-class");
       keyImage.setAttribute("src", "images/test_piano_key.png");
       keyImage.setAttribute("alt", "Key" + i);
-      document.getElementById("div-piano-key-area").appendChild(keyImage);
+      document.getElementById("div-piano-key-container").appendChild(keyImage);
       keyHTMLObjects.push(keyImage);
     }
   }
@@ -40,7 +40,8 @@ var keyController = (function() {
     event.target.setAttribute("src", "images/test_piano_key_pressed.png");
     var p = event.target.parentElement;
     var index = Array.prototype.indexOf.call(p.children, event.target);
-    console.log(keyNotes[index]);
+    //console.log(keyNotes[index]);
+
     var sound = new Audio("sounds/" + keyNotes[index] + ".mp3")
     sound.play();
   }

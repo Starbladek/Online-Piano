@@ -23,20 +23,25 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
 
   <!-- Piano key area -->
   <style>
-    #div-piano-key-area {
+    #div-piano-key-background {
       background-color: rgb(200, 200, 200);
       border-style: solid;
-      margin: 50px 50px;
+      margin: 0 5%;
       text-align: center;
+      white-space: nowrap;
+    }
+
+    #div-piano-key-container {
+      margin: 5% 5%;
     }
   </style>
 
-  <div id="div-piano-key-area">
-    <!--
-    <img class="key-class" src="images/test_piano_key.png" alt="Key1">
-    <img class="key-class" src="images/test_piano_key.png" alt="Key2">
-    <img class="key-class" src="images/test_piano_key.png" alt="Key3">
-    -->
+  <div id="div-piano-key-background">
+    <div id="div-piano-key-container">
+    </div>
+  </div>
+
+  <div>
   </div>
 </body>
 
