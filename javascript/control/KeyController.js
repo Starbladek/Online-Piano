@@ -53,9 +53,10 @@ var keyController = (function() {
     var sound = new Audio("sounds/" + keyNotes[index] + ".mp3");
     sound.play();
 
-    if (playbackController.notesToPlay.length < 8) {
-      playbackController.notesToPlay.push(keyNotes[index]);
-      console.log(playbackController.notesToPlay);
+    let notesToPlay = playbackController.getNotesToPlay();
+    if (notesToPlay.length < 8) {
+      notesToPlay.push(keyNotes[index]);
+      console.log(notesToPlay);
     }
   }
 

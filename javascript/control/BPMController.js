@@ -1,8 +1,8 @@
 var bpmController = (function() {
 
-  var bpm = 120;
-  var bpmMin;
-  var bpmMax;
+  let bpm = 120;
+  let bpmMin;
+  let bpmMax;
 
   function initializeBPMCounter() {
     console.log("Initializing BPM controls...");
@@ -16,9 +16,9 @@ var bpmController = (function() {
 
 
   function checkIfBPMIsInBounds(event) {
-    var value = parseInt(event.target.value);
-    var min = parseInt(event.target.min);
-    var max = parseInt(event.target.max);
+    let value = parseInt(event.target.value);
+    let min = parseInt(event.target.min);
+    let max = parseInt(event.target.max);
 
     if (value < min) {
       event.target.value = event.target.min;
@@ -28,7 +28,7 @@ var bpmController = (function() {
     }
   }
 
-  
+
 
   return {
     initializeBPMCounter: initializeBPMCounter
