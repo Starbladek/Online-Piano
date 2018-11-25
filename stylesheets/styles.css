@@ -63,7 +63,11 @@ h1 {
   height: 15px;
 }
 
-.playback-bottom-container {
+.playback-measure-container {
+
+}
+
+.measure-display {
   background-color: rgb(150, 200, 150);
   margin-left: 25px;
   margin-right: 25px;
@@ -72,7 +76,7 @@ h1 {
   justify-content: space-between;
 }
 
-.note-display-item {
+.measure-note {
   background-color: rgb(150, 150, 200);
   width: 25px;
   height: 25px;

@@ -15,15 +15,21 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
   <link rel="stylesheet" href="stylesheets/styles.css">
 
   <script src="javascript/model/NoteModel.js"></script>
+  <script src="javascript/model/MeasureModel.js"></script>
+  <script src="javascript/view/NoteView.js"></script>
+  <script src="javascript/view/MeasureView.js"></script>
+
   <script src="javascript/control/KeyController.js"></script>
   <script src="javascript/control/BPMController.js"></script>
   <script src="javascript/control/PlaybackController.js"></script>
+  <script src="javascript/control/MeasureController.js"></script>
 
   <script>
     window.onload = function() {
       keyController.initializeKeyboard();
       bpmController.initializeBPMCounter();
       playbackController.initializePlaybackControls();
+      measureController.initializeMainMeasure();
     };
   </script>
 </head>
@@ -61,31 +67,7 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
       </span>
     </div>
 
-    <div class="playback-bottom-container">
-      <span class="note-display-item">
-        C3
-      </span>
-      <span class="note-display-item">
-        C4
-      </span>
-      <span class="note-display-item">
-        C5
-      </span>
-      <span class="note-display-item">
-        C6
-      </span>
-      <span class="note-display-item">
-        C7
-      </span>
-      <span class="note-display-item">
-        C8
-      </span>
-      <span class="note-display-item">
-        C9
-      </span>
-      <span class="note-display-item">
-        C10
-      </span>
+    <div class="playback-measure-container" id="playback-measure-container">
     </div>
   </div>
 </body>

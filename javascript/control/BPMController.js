@@ -5,7 +5,7 @@ var bpmController = (function() {
 
   function initializeBPMCounter() {
     console.log("Initializing BPM controls...");
-    var bpmCounter = document.getElementById("bpm-counter");
+    let bpmCounter = document.getElementById("bpm-counter");
     bpmMin = parseInt(bpmCounter.min);
     bpmMax = parseInt(bpmCounter.max);
     bpmCounter.value = (bpmMin + bpmMax) / 2;

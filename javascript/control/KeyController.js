@@ -15,7 +15,7 @@ var keyController = (function() {
 
   //Creates the HTML image objects and pushes them to the correct div
   function generateKeys() {
-    for (var i = 0; i < keyNotes.length; i++) {
+    for (let i = 0; i < keyNotes.length; i++) {
       let keyImage = document.createElement("IMG");
       keyImage.setAttribute("class", "key-class");
       keyImage.setAttribute("src", "images/test_piano_key.png");
@@ -40,28 +40,20 @@ var keyController = (function() {
 
 
 
-  //Play note assigned to key
   function playNote(event) {
     pressKeyImg(event);
     let p = event.target.parentElement;
     let index = Array.prototype.indexOf.call(p.children, event.target);
-    //console.log(keyNotes[index]);
     let sound = new Audio("sounds/" + keyNotes[index] + ".mp3");
     sound.play();
 
-    let notesToPlay = playbackController.getNotesToPlay();
-    if (notesToPlay.length < 8) {
-      notesToPlay.push(keyNotes[index]);
-      console.log(notesToPlay);
-    }
+    let newNote = new noteModel.Note(keyNotes[index]);
+    measureController.updateMainMeasure(newNote);
   }
 
   function addRest(event) {
-    let notesToPlay = playbackController.getNotesToPlay();
-    if (notesToPlay.length < 8) {
-      notesToPlay.push("Rest");
-      console.log(notesToPlay);
-    }
+    let newNote = new noteModel.Note("Rest");
+    measureController.updateMainMeasure(newNote);
   }
 
   function pressKeyImg(event) {

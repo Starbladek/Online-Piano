@@ -1,7 +1,6 @@
 var playbackController = (function() {
 
-  let notesToPlay = [];
-  let currentNote = 0;
+  let currentNoteToPlay = 0;
   let timerLength = 1000;
   let timerHolder;
   let playbackActive = false;
@@ -16,17 +15,16 @@ var playbackController = (function() {
 
 
   function clearNotes(event) {
-    notesToPlay = [];
     clearInterval(timerHolder);
     playbackActive = false;
-    currentNote = 0;
-    console.log(notesToPlay);
+    currentNoteToPlay = 0;
+    measureController.resetMainMeasure();
   }
 
   function playNotes(event) {
-    if (notesToPlay.length > 0) {
+    if (measureController.getMainMeasure().getNotes().length > 0) {
       if (!playbackActive) {
-        console.log("playing notes");
+        console.log("Starting playback!");
         calculateTimerLength();
         timerHolder = setInterval(playCurrentNote, timerLength);
         playbackActive = true;
@@ -40,36 +38,36 @@ var playbackController = (function() {
 
   function stopNotes(event) {
     if (playbackActive) {
-      console.log("stopping playback");
+      console.log("Stopping playback.");
       clearInterval(timerHolder);
       playbackActive = false;
-      currentNote = 0;
+      currentNoteToPlay = 0;
     }
     else {
       console.log("The notes aren't playing, silly");
     }
   }
 
-  //Plays current note and moves forward one note
   function playCurrentNote() {
-    if (currentNote < notesToPlay.length) {
-      if (notesToPlay[currentNote] != "Rest") {
-        let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
+    if (currentNoteToPlay < measureController.getMainMeasure().getNotes().length) {
+      if (measureController.getMainMeasure().getNotes()[currentNoteToPlay].noteName != "Rest") {
+        let sound = new Audio("sounds/" + measureController.getMainMeasure().getNotes()[currentNoteToPlay].noteName + ".mp3");
         sound.play();
       }
-      currentNote++;
+      currentNoteToPlay++;
     } else {
-      currentNote = 0;
+      currentNoteToPlay = 0;
       //If we should loop, play through the notes again
       if (document.getElementById("loop-checkbox").checked) {
-        if (notesToPlay[currentNote] != "Rest") {
-          let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
+        if (measureController.getMainMeasure().getNotes()[currentNoteToPlay].noteName != "Rest") {
+          let sound = new Audio("sounds/" + measureController.getMainMeasure().getNotes()[currentNoteToPlay].noteName + ".mp3");
           sound.play();
         }
-        currentNote++;
+        currentNoteToPlay++;
       }
       //Else, end the interval
       else {
+        console.log("Finished playback.");
         clearInterval(timerHolder);
         playbackActive = false;
       }
@@ -88,8 +86,7 @@ var playbackController = (function() {
 
 
   return {
-    initializePlaybackControls: initializePlaybackControls,
-    getNotesToPlay: getNotesToPlay
+    initializePlaybackControls: initializePlaybackControls
   };
 
 })();

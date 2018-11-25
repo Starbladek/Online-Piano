@@ -1,11 +1,11 @@
 var noteModel = (function() {
 
-  function KeyModel() {
-    this.noteName = "";
+  function Note(noteName) {
+    this.noteName = noteName;
   }
 
-  KeyModel.prototype.getNoteName = function() {
-    return this.noteName;
+  return {
+    Note: Note
   };
 
 })();
