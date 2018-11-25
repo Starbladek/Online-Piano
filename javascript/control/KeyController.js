@@ -4,54 +4,73 @@ var keyNotes = [
   'C5'
 ];
 var keyHTMLObjects = [];
-var cNote = new Audio("");
 
 var keyController = (function() {
 
-  //Create HTML key image objects and give them listeners
-  function generateKeys() {
-    createKeyObjects();
-    assignKeysAllListeners();
+  function initializeKeyboard() {
+    console.log("Initializing keyboard...");
+    generateKeys();
+    generateRestKey();
   }
 
   //Creates the HTML image objects and pushes them to the correct div
-  function createKeyObjects() {
+  function generateKeys() {
     for (var i = 0; i < keyNotes.length; i++) {
       var keyImage = document.createElement("IMG");
       keyImage.setAttribute("class", "key-class");
       keyImage.setAttribute("src", "images/test_piano_key.png");
       keyImage.setAttribute("alt", "Key" + i);
-      document.getElementById("div-piano-key-container").appendChild(keyImage);
+
+      keyImage.addEventListener('mousedown', playNote);
+      keyImage.addEventListener('mouseup', unpressKeyImg);
+      keyImage.addEventListener('mouseleave', unpressKeyImg);
+
+      document.getElementById("piano-keys-container").appendChild(keyImage);
       keyHTMLObjects.push(keyImage);
     }
   }
 
-  //Gives all keys a click listener which plays their note on click
-  function assignKeysAllListeners() {
-    for (var i = 0; i < keyHTMLObjects.length; i++) {
-      keyHTMLObjects[i].addEventListener('mousedown', playNote);
-      keyHTMLObjects[i].addEventListener('mouseup', resetKeyImage);
-      keyHTMLObjects[i].addEventListener('mouseleave', resetKeyImage);
-    }
+  function generateRestKey() {
+    var restButton = document.createElement("IMG");
+    restButton.setAttribute("src", "images/test_piano_key.png");
+    restButton.setAttribute("alt", "RestKey");
+
+    restButton.addEventListener('mousedown', pressKeyImg);
+    restButton.addEventListener('mouseup', unpressKeyImg);
+    restButton.addEventListener('mouseleave', unpressKeyImg);
+
+    document.getElementById("rest-button-container").appendChild(restButton);
   }
+
+
 
   //Play note assigned to key
   function playNote(event) {
-    event.target.setAttribute("src", "images/test_piano_key_pressed.png");
+    pressKeyImg(event);
     var p = event.target.parentElement;
     var index = Array.prototype.indexOf.call(p.children, event.target);
     //console.log(keyNotes[index]);
-
-    var sound = new Audio("sounds/" + keyNotes[index] + ".mp3")
+    var sound = new Audio("sounds/" + keyNotes[index] + ".mp3");
     sound.play();
+
+    if (playbackController.notesToPlay.length < 8) {
+      playbackController.notesToPlay.push(keyNotes[index]);
+      console.log(playbackController.notesToPlay);
+    }
   }
 
-  function resetKeyImage(event) {
+  function pressKeyImg(event) {
+    event.target.setAttribute("src", "images/test_piano_key_pressed.png");
+  }
+
+  function unpressKeyImg(event) {
     event.target.setAttribute("src", "images/test_piano_key.png");
   }
 
+
+
   return {
-    generateKeys: generateKeys
-  }
+    initializeKeyboard: initializeKeyboard
+  };
 
 })();
