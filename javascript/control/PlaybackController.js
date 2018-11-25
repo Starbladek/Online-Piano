@@ -3,6 +3,7 @@ var playbackController = (function() {
   let notesToPlay = [];
   let currentNote = 0;
   let timerHolder;
+  let playbackActive = false;
 
   function initializePlaybackControls() {
     console.log("Initializing playback controls...");
@@ -16,18 +17,31 @@ var playbackController = (function() {
   function clearNotes(event) {
     notesToPlay = [];
     clearInterval(timerHolder);
+    playbackActive = false;
     currentNote = 0;
     console.log(notesToPlay);
   }
 
   function playNotes(event) {
-    console.log("playing notes");
-    timerHolder = setInterval(playCurrentNote, 1000);
+    if (notesToPlay.length > 0) {
+      if (!playbackActive) {
+        console.log("playing notes");
+        timerHolder = setInterval(playCurrentNote, 1000);
+        playbackActive = true;
+      }
+      else {
+        console.log("The notes are already playing, silly");
+      }
+    }
+    else {
+      console.log("There are no notes to play, silly");
+    }
   }
 
   function stopNotes(event) {
     console.log("stopping playback");
     clearInterval(timerHolder);
+    playbackActive = false;
     currentNote = 0;
   }
 
@@ -49,6 +63,7 @@ var playbackController = (function() {
       //Else, end the interval
       else {
         clearInterval(timerHolder);
+        playbackActive = false;
       }
     }
   }

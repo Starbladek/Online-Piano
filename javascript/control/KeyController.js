@@ -16,7 +16,7 @@ var keyController = (function() {
   //Creates the HTML image objects and pushes them to the correct div
   function generateKeys() {
     for (var i = 0; i < keyNotes.length; i++) {
-      var keyImage = document.createElement("IMG");
+      let keyImage = document.createElement("IMG");
       keyImage.setAttribute("class", "key-class");
       keyImage.setAttribute("src", "images/test_piano_key.png");
       keyImage.setAttribute("alt", "Key" + i);
@@ -31,7 +31,7 @@ var keyController = (function() {
   }
 
   function generateRestKey() {
-    var restButton = document.createElement("IMG");
+    let restButton = document.createElement("IMG");
     restButton.setAttribute("src", "images/test_piano_key.png");
     restButton.setAttribute("alt", "RestKey");
 
@@ -47,10 +47,10 @@ var keyController = (function() {
   //Play note assigned to key
   function playNote(event) {
     pressKeyImg(event);
-    var p = event.target.parentElement;
-    var index = Array.prototype.indexOf.call(p.children, event.target);
+    let p = event.target.parentElement;
+    let index = Array.prototype.indexOf.call(p.children, event.target);
     //console.log(keyNotes[index]);
-    var sound = new Audio("sounds/" + keyNotes[index] + ".mp3");
+    let sound = new Audio("sounds/" + keyNotes[index] + ".mp3");
     sound.play();
 
     let notesToPlay = playbackController.getNotesToPlay();
