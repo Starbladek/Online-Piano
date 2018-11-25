@@ -1,15 +1,14 @@
 var bpmController = (function() {
 
-  let bpm = 120;
   let bpmMin;
   let bpmMax;
 
   function initializeBPMCounter() {
     console.log("Initializing BPM controls...");
     var bpmCounter = document.getElementById("bpm-counter");
-    bpmMin = bpmCounter.min;
-    bpmMax = bpmCounter.max;
-    bpmCounter.value = bpm;
+    bpmMin = parseInt(bpmCounter.min);
+    bpmMax = parseInt(bpmCounter.max);
+    bpmCounter.value = (bpmMin + bpmMax) / 2;
     document.getElementById("bpm-counter").addEventListener("change", checkIfBPMIsInBounds);
   }
 
@@ -22,8 +21,7 @@ var bpmController = (function() {
 
     if (value < min) {
       event.target.value = event.target.min;
-    }
-    else if (value > max) {
+    } else if (value > max) {
       event.target.value = event.target.max;
     }
   }

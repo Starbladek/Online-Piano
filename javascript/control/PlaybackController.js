@@ -2,6 +2,7 @@ var playbackController = (function() {
 
   let notesToPlay = [];
   let currentNote = 0;
+  let timerLength = 1000;
   let timerHolder;
   let playbackActive = false;
 
@@ -26,14 +27,13 @@ var playbackController = (function() {
     if (notesToPlay.length > 0) {
       if (!playbackActive) {
         console.log("playing notes");
-        timerHolder = setInterval(playCurrentNote, 1000);
+        calculateTimerLength();
+        timerHolder = setInterval(playCurrentNote, timerLength);
         playbackActive = true;
-      }
-      else {
+      } else {
         console.log("The notes are already playing, silly");
       }
-    }
-    else {
+    } else {
       console.log("There are no notes to play, silly");
     }
   }
@@ -51,8 +51,7 @@ var playbackController = (function() {
       let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
       sound.play();
       currentNote++;
-    }
-    else {
+    } else {
       currentNote = 0;
       //If we should loop, play through the notes again
       if (document.getElementById("loop-checkbox").checked) {
@@ -66,6 +65,11 @@ var playbackController = (function() {
         playbackActive = false;
       }
     }
+  }
+
+  function calculateTimerLength() {
+    let bpm = parseInt(document.getElementById("bpm-counter").value);
+    timerLength = 60000 / bpm;
   }
 
   function getNotesToPlay() {
