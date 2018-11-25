@@ -25,21 +25,17 @@ var keyController = (function() {
       keyImage.addEventListener('mouseup', unpressKeyImg);
       keyImage.addEventListener('mouseleave', unpressKeyImg);
 
-      document.getElementById("piano-keys-container").appendChild(keyImage);
+      document.getElementById("key-container").appendChild(keyImage);
       keyHTMLObjects.push(keyImage);
     }
   }
 
   function generateRestKey() {
-    let restButton = document.createElement("IMG");
-    restButton.setAttribute("src", "images/test_piano_key.png");
-    restButton.setAttribute("alt", "RestKey");
-
-    restButton.addEventListener('mousedown', pressKeyImg);
-    restButton.addEventListener('mouseup', unpressKeyImg);
-    restButton.addEventListener('mouseleave', unpressKeyImg);
-
-    document.getElementById("rest-button-container").appendChild(restButton);
+    let restButton = document.createElement("button");
+    restButton.setAttribute("class", "rest-button");
+    restButton.innerHTML = "Rest!";
+    restButton.addEventListener('click', addRest);
+    document.getElementById("rest-container").appendChild(restButton);
   }
 
 
@@ -56,6 +52,14 @@ var keyController = (function() {
     let notesToPlay = playbackController.getNotesToPlay();
     if (notesToPlay.length < 8) {
       notesToPlay.push(keyNotes[index]);
+      console.log(notesToPlay);
+    }
+  }
+
+  function addRest(event) {
+    let notesToPlay = playbackController.getNotesToPlay();
+    if (notesToPlay.length < 8) {
+      notesToPlay.push("Rest");
       console.log(notesToPlay);
     }
   }

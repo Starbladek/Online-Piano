@@ -14,6 +14,7 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
   <link rel="stylesheet" href="stylesheets/styles.css">
 
+  <script src="javascript/model/NoteModel.js"></script>
   <script src="javascript/control/KeyController.js"></script>
   <script src="javascript/control/BPMController.js"></script>
   <script src="javascript/control/PlaybackController.js"></script>
@@ -31,94 +32,27 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
   <h1>Online Piano</h1>
 
   <!-- Piano key area -->
-  <style>
-    #piano-keys-background {
-      background-color: rgb(200, 200, 200);
-      border-style: solid;
-      margin: 0 5%;
-      text-align: center;
-      white-space: nowrap;
-    }
 
-    #piano-keys-container {
-      margin-top: 5%;
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-
-    #rest-button-container {
-      margin-left: 5%;
-      margin-right: 5%;
-      margin-bottom: 5%;
-    }
-
-    #rest-button-container img {
-      height: 25px;
-      width: 100%;
-    }
-  </style>
-
-  <div id="piano-keys-background">
-    <div id="piano-keys-container">
+  <div class="key-and-rest-container">
+    <div class="key-container" id="key-container">
     </div>
 
-    <div id="rest-button-container">
+    <div class="rest-container" id="rest-container">
     </div>
   </div>
 
 
 
   <!-- Playback area -->
-  <style>
-    #div-playback-area {
-      background-color: rgb(200, 200, 200);
-      border-style: solid;
-      margin-top: 50px;
-      margin-left: 5%;
-      margin-right: 5%;
-    }
 
-    #top-wrapper {
-      background-color: rgb(200, 150, 150);
-      border-style: solid;
-      margin: 5%;
-      padding: 10px;
-      overflow: hidden;
-    }
-
-    #top-left-stuff {
-      float: left;
-    }
-
-    #top-right-stuff {
-      float: right;
-    }
-
-    #top-right-stuff img {
-      width: 15px;
-      height: 15px;
-    }
-
-    #bottom-wrapper {
-      margin-left: 5%;
-      margin-right: 5%;
-      margin-bottom: 5%;
-    }
-
-    #bottom-wrapper img {
-      height: 100px;
-      width: 100%;
-    }
-  </style>
-
-  <div id="div-playback-area">
-    <div id="top-wrapper">
-      <span id="top-left-stuff">
+  <div class="playback-area-container">
+    <div class="playback-top-container">
+      <span class="playback-top-container-left">
         <span>BPM</span>
         <input id="bpm-counter" type="number" min="80" max="240"></input>
       </span>
 
-      <span id="top-right-stuff">
+      <span class="playback-top-container-right">
         <button id="reset-button">Reset</button>
         <span style="margin-left:20px;">Loop</span>
         <input id="loop-checkbox" type="checkbox" style="margin-right:20px;"></input>
@@ -127,8 +61,31 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
       </span>
     </div>
 
-    <div id="bottom-wrapper">
-      <img src="images/test_piano_key.png"></img>
+    <div class="playback-bottom-container">
+      <span class="note-display-item">
+        C3
+      </span>
+      <span class="note-display-item">
+        C4
+      </span>
+      <span class="note-display-item">
+        C5
+      </span>
+      <span class="note-display-item">
+        C6
+      </span>
+      <span class="note-display-item">
+        C7
+      </span>
+      <span class="note-display-item">
+        C8
+      </span>
+      <span class="note-display-item">
+        C9
+      </span>
+      <span class="note-display-item">
+        C10
+      </span>
     </div>
   </div>
 </body>

@@ -3,8 +3,79 @@ h1 {
   text-align: center;
 }
 
+.key-and-rest-container {
+  background-color: rgb(200, 200, 200);
+  border-style: solid;
+  margin: 0 15%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.key-container {
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.rest-container {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+
 .key-class {
   display: inline-block;
-  width: 6.66%;
   height: auto;
+  width: 6.66%;
+}
+
+.rest-button {
+  height: 50px;
+  width: 100%;
+}
+
+.playback-area-container {
+  background-color: rgb(200, 200, 200);
+  border-style: solid;
+  margin-top: 25px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.playback-top-container {
+  background-color: rgb(200, 150, 150);
+  border-style: solid;
+  margin: 25px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.playback-top-container-left {
+  float: left;
+}
+
+.playback-top-container-right {
+  float: right;
+}
+
+.playback-top-container-right img {
+  width: 15px;
+  height: 15px;
+}
+
+.playback-bottom-container {
+  background-color: rgb(150, 200, 150);
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-display-item {
+  background-color: rgb(150, 150, 200);
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
 }

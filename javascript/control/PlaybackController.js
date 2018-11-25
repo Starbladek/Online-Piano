@@ -39,24 +39,33 @@ var playbackController = (function() {
   }
 
   function stopNotes(event) {
-    console.log("stopping playback");
-    clearInterval(timerHolder);
-    playbackActive = false;
-    currentNote = 0;
+    if (playbackActive) {
+      console.log("stopping playback");
+      clearInterval(timerHolder);
+      playbackActive = false;
+      currentNote = 0;
+    }
+    else {
+      console.log("The notes aren't playing, silly");
+    }
   }
 
   //Plays current note and moves forward one note
   function playCurrentNote() {
     if (currentNote < notesToPlay.length) {
-      let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
-      sound.play();
+      if (notesToPlay[currentNote] != "Rest") {
+        let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
+        sound.play();
+      }
       currentNote++;
     } else {
       currentNote = 0;
       //If we should loop, play through the notes again
       if (document.getElementById("loop-checkbox").checked) {
-        let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
-        sound.play();
+        if (notesToPlay[currentNote] != "Rest") {
+          let sound = new Audio("sounds/" + notesToPlay[currentNote] + ".mp3");
+          sound.play();
+        }
         currentNote++;
       }
       //Else, end the interval
