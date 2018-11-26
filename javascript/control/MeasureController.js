@@ -1,40 +1,95 @@
 var measureController = (function() {
 
-  let mainMeasure;
-  let mView;
+  let measures = [];
+  let mView = [];
+
+  let numberOfMeasures = 0;
+  let currentMeasure = 0;
   let currentNote = 0;
 
-  function initializeMainMeasure() {
+  function initializeMeasureController() {
     console.log("Initializing main measure...");
-    mainMeasure = new measureModel.Measure();
-    mView = new measureView.MeasureView(mainMeasure);
+
+    document.getElementById("add-measure-button").addEventListener("click", createNewMeasure);
+    document.getElementById("remove-measure-button").addEventListener("click", removeLastMeasure);
+    document.getElementById("reset-button").addEventListener("click", clearAllMeasures);
+
+    createNewMeasure();
+    createNewMeasure();
   }
 
-  function updateMainMeasure(noteToUpdate) {
-    if (currentNote < 8) {
-      mainMeasure.getNotes()[currentNote] = noteToUpdate;
-      mView.updateMeasure(mainMeasure);
-      currentNote++;
+
+
+  function createNewMeasure() {
+    measures[numberOfMeasures] = new measureModel.Measure();
+    mView[numberOfMeasures] = new measureView.MeasureView(measures[numberOfMeasures]);
+    numberOfMeasures++;
+  }
+
+  function removeLastMeasure() {
+    if (numberOfMeasures > 1) {
+      numberOfMeasures--;
+      //If our current note was on the measure we're deleting,
+      //set the currentMeasure and currentNote to the end of the
+      //penultimate measure
+      if (currentMeasure >= numberOfMeasures) {
+        currentMeasure--;
+        currentNote = 8;
+      }
+      mView[numberOfMeasures].removeMeasure();
+      measures.splice(numberOfMeasures, 1);
+      mView.splice(numberOfMeasures, 1);
     }
   }
 
-  function resetMainMeasure() {
+  function clearAllMeasures(event) {
+    clearInterval(playbackController.timerHolder);
+    playbackController.playbackActive = false;
+    playbackController.currentNoteToPlay = 0;
+
+    currentMeasure = 0;
     currentNote = 0;
-    mainMeasure.clearNotes();
-    mView.updateMeasure(mainMeasure);
+
+    for (let i = 0; i < numberOfMeasures; i++) {
+      resetMeasure(i);
+    }
   }
 
-  function getMainMeasure() {
-    return mainMeasure;
+
+
+  function updateMeasure(note) {
+    if (currentNote < 8) {
+      measures[currentMeasure].getNotes()[currentNote] = note;
+      mView[currentMeasure].updateMeasure(measures[currentMeasure]);
+      currentNote++;
+    } else {
+      //Add one here so we don't go out of bounds
+      if (currentMeasure + 1 < numberOfMeasures) {
+        currentMeasure++;
+        currentNote = 0;
+
+        measures[currentMeasure].getNotes()[currentNote] = note;
+        mView[currentMeasure].updateMeasure(measures[currentMeasure]);
+        currentNote++;
+      }
+    }
+  }
+
+  function resetMeasure(index) {
+    measures[index].clearNotes();
+    mView[index].updateMeasure(measures[index]);
+  }
+
+  function getMeasures() {
+    return measures;
   }
 
 
 
   return {
-    initializeMainMeasure: initializeMainMeasure,
-    updateMainMeasure: updateMainMeasure,
-    resetMainMeasure: resetMainMeasure,
-    getMainMeasure: getMainMeasure
+    initializeMeasureController: initializeMeasureController,
+    updateMeasure: updateMeasure,
+    getMeasures: getMeasures
   };
 
 })();

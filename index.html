@@ -29,7 +29,7 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
       keyController.initializeKeyboard();
       bpmController.initializeBPMCounter();
       playbackController.initializePlaybackControls();
-      measureController.initializeMainMeasure();
+      measureController.initializeMeasureController();
     };
   </script>
 </head>
@@ -59,6 +59,8 @@ browser-sync start --server --files "stylesheets/*.css, *.html"
       </span>
 
       <span class="playback-top-container-right">
+        <button id="add-measure-button">Add Measure</button>
+        <button id="remove-measure-button">Remove Measure</button>
         <button id="reset-button">Reset</button>
         <span style="margin-left:20px;">Loop</span>
         <input id="loop-checkbox" type="checkbox" style="margin-right:20px;"></input>
