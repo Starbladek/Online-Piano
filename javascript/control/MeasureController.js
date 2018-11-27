@@ -21,9 +21,11 @@ var measureController = (function() {
 
 
   function createNewMeasure() {
-    measures[numberOfMeasures] = new measureModel.Measure();
-    mView[numberOfMeasures] = new measureView.MeasureView(measures[numberOfMeasures]);
-    numberOfMeasures++;
+    if (!playbackController.playbackActive) {
+      measures[numberOfMeasures] = new measureModel.Measure();
+      mView[numberOfMeasures] = new measureView.MeasureView(measures[numberOfMeasures]);
+      numberOfMeasures++;
+    }
   }
 
   function removeLastMeasure() {

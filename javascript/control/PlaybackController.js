@@ -33,33 +33,33 @@ var playbackController = (function() {
       clearInterval(timerHolder);
       playbackActive = false;
       currentNote = 0;
+      currentMeasure = 0;
     } else {
       console.log("The notes aren't playing, silly");
     }
   }
 
   function playCurrentNote() {
-    if (currentNote < measureController.getMainMeasure().getNotes().length) {
-      if (measureController.getMainMeasure().getNotes()[currentNote].noteName != "Rest") {
-        let sound = new Audio("sounds/" + measureController.getMainMeasure().getNotes()[currentNote].noteName + ".mp3");
-        sound.play();
-      }
-      currentNote++;
-    } else {
+    if (measures[currentMeasure].getNotes()[currentNote].noteName != "Rest") {
+      let sound = new Audio("sounds/" + measures[currentMeasure].getNotes()[currentNote].noteName + ".mp3");
+      sound.play();
+    }
+    currentNote++;
+
+    if (currentNote >= measures[currentMeasure].getNotes().length) {
       currentNote = 0;
-      //If we should loop, play through the notes again
-      if (document.getElementById("loop-checkbox").checked) {
-        if (measureController.getMainMeasure().getNotes()[currentNote].noteName != "Rest") {
-          let sound = new Audio("sounds/" + measureController.getMainMeasure().getNotes()[currentNote].noteName + ".mp3");
-          sound.play();
+      currentMeasure++;
+
+      //If we just finished the last measure, loop or end the interval
+      if (currentMeasure >= measures.length) {
+        currentMeasure = 0;
+
+        //If loop box is not checked, end the interval
+        if (!document.getElementById("loop-checkbox").checked) {
+          console.log("Finished playback.");
+          clearInterval(timerHolder);
+          playbackActive = false;
         }
-        currentNote++;
-      }
-      //Else, end the interval
-      else {
-        console.log("Finished playback.");
-        clearInterval(timerHolder);
-        playbackActive = false;
       }
     }
   }
