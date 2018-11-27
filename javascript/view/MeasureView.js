@@ -28,6 +28,10 @@ var measureView = (function() {
     this.measureDiv.parentNode.removeChild(this.measureDiv);
   };
 
+  MeasureView.prototype.getMeasureDiv = function() {
+    return this.measureDiv;
+  }
+
   return {
     MeasureView: MeasureView
   };
