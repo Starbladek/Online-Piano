@@ -19,9 +19,11 @@ var playbackController = (function() {
     measures = measureController.getMeasures();
     if (!playbackActive) {
       console.log("Starting playback!");
+      playbackActive = true;
+      playCurrentNote();
+
       calculateTimerLength();
       timerHolder = setInterval(playCurrentNote, timerLength);
-      playbackActive = true;
     } else {
       console.log("The notes are already playing, silly");
     }
@@ -66,7 +68,7 @@ var playbackController = (function() {
 
   function calculateTimerLength() {
     let bpm = parseInt(document.getElementById("bpm-counter").value);
-    timerLength = 60000 / bpm;
+    timerLength = 60000 / (bpm * (measureModel.getMeasureLength()/4));
   }
 
   function getPlaybackActive() {

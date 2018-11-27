@@ -25,7 +25,7 @@ var measureController = (function() {
 
       let newNoteNodes = mView[mView.length - 1].getMeasureDiv().childNodes;
       for (let i = 0; i < newNoteNodes.length; i++) {
-        newNoteNodes[i].addEventListener("click", setCurrentNote);
+        newNoteNodes[i].addEventListener("click", setCurrentNoteAndMeasure);
       }
     }
   }
@@ -36,6 +36,10 @@ var measureController = (function() {
         mView[mView.length - 1].removeMeasure();
         measures.pop();
         mView.pop();
+
+        if (currentMeasure > measures.length - 1) {
+          currentMeasure = measures.length - 1;
+        }
       }
     }
   }
@@ -58,10 +62,15 @@ var measureController = (function() {
     mView[currentMeasure].updateMeasure(measures[currentMeasure]);
   }
 
-  function setCurrentNote(event) {
-    let p = event.target.parentElement;
-    let index = Array.prototype.indexOf.call(p.children, event.target);
-    currentNote = index;
+  function setCurrentNoteAndMeasure(event) {
+    let selectedMeasure = event.target.parentElement;
+    let selectedMeasureParent = selectedMeasure.parentElement;
+    let measureIndex = Array.prototype.indexOf.call(selectedMeasureParent.children, selectedMeasure);
+    currentMeasure = measureIndex;
+
+    let selectedNote = event.target;
+    let noteIndex = Array.prototype.indexOf.call(selectedMeasure.children, selectedNote);
+    currentNote = noteIndex;
   }
 
   function resetMeasure(index) {

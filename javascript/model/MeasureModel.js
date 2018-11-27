@@ -1,6 +1,6 @@
 var measureModel = (function() {
 
-  let measureLength = 4;
+  let measureLength = 16;
 
   function Measure() {
     this.notes = [];
