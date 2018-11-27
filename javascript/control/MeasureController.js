@@ -21,6 +21,9 @@ var measureController = (function() {
 
   function createNewMeasure() {
     if (!playbackController.getPlaybackActive()) {
+      if (getIfFull())
+        currentNote = 0;
+
       measures[numberOfMeasures] = new measureModel.Measure();
       mView[numberOfMeasures] = new measureView.MeasureView(measures[numberOfMeasures]);
       numberOfMeasures++;
@@ -59,7 +62,17 @@ var measureController = (function() {
 
 
   function updateMeasure(note) {
-    if (currentNote < measureModel.getMeasureLength()) {
+    measures[currentMeasure].getNotes()[currentNote] = note;
+    mView[currentMeasure].updateMeasure(measures[currentMeasure]);
+    currentNote++;
+
+    if (currentNote >= measureModel.getMeasureLength()) {
+      currentMeasure++;
+      if (!getIfFull())
+        currentNote = 0;
+    }
+
+    /*if (currentNote < measureModel.getMeasureLength()) {
       measures[currentMeasure].getNotes()[currentNote] = note;
       mView[currentMeasure].updateMeasure(measures[currentMeasure]);
       currentNote++;
@@ -73,7 +86,7 @@ var measureController = (function() {
         mView[currentMeasure].updateMeasure(measures[currentMeasure]);
         currentNote++;
       }
-    }
+    }*/
   }
 
   function resetMeasure(index) {
@@ -85,12 +98,17 @@ var measureController = (function() {
     return measures;
   }
 
+  function getIfFull() {
+    return (currentNote >= measureModel.getMeasureLength() && currentMeasure >= numberOfMeasures);
+  }
+
 
 
   return {
     initializeMeasureController: initializeMeasureController,
     updateMeasure: updateMeasure,
-    getMeasures: getMeasures
+    getMeasures: getMeasures,
+    getIfFull: getIfFull
   };
 
 })();

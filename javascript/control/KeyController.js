@@ -48,12 +48,14 @@ var keyController = (function() {
     sound.play();
 
     let newNote = new noteModel.Note(keyNotes[index]);
-    measureController.updateMeasure(newNote);
+    if (!measureController.getIfFull())
+      measureController.updateMeasure(newNote);
   }
 
   function addRest(event) {
     let newNote = new noteModel.Note("Rest");
-    measureController.updateMeasure(newNote);
+    if (!measureController.getIfFull())
+      measureController.updateMeasure(newNote);
   }
 
   function pressKeyImg(event) {
