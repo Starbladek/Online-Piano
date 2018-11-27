@@ -27,6 +27,7 @@ h1 {
   display: inline-block;
   height: auto;
   width: 6.66%;
+  cursor: pointer;
 }
 
 .rest-button {
@@ -48,6 +49,7 @@ h1 {
   margin: 25px;
   padding: 10px;
   overflow: hidden;
+  cursor: default;
 }
 
 .playback-top-container-left {
@@ -61,6 +63,7 @@ h1 {
 .playback-top-container-right img {
   width: 15px;
   height: 15px;
+  cursor: pointer;
 }
 
 .playback-measure-container {
@@ -82,4 +85,5 @@ h1 {
   height: 50px;
   text-align: center;
   line-height: 50px;
+  cursor: default;
 }

@@ -18,7 +18,7 @@ var keyController = (function() {
     for (let i = 0; i < keyNotes.length; i++) {
       let keyImage = document.createElement("IMG");
       keyImage.setAttribute("class", "key-class");
-      keyImage.setAttribute("src", "images/test_piano_key.png");
+      keyImage.setAttribute("src", "images/key_" + keyNotes[i] + ".png");
       keyImage.setAttribute("alt", "Key" + i);
 
       keyImage.addEventListener('mousedown', playNote);
@@ -57,11 +57,13 @@ var keyController = (function() {
   }
 
   function pressKeyImg(event) {
-    event.target.setAttribute("src", "images/test_piano_key_pressed.png");
+    event.target.setAttribute("src", "images/key_pressed.png");
   }
 
   function unpressKeyImg(event) {
-    event.target.setAttribute("src", "images/test_piano_key.png");
+    let p = event.target.parentElement;
+    let index = Array.prototype.indexOf.call(p.children, event.target);
+    event.target.setAttribute("src", "images/key_" + keyNotes[index] + ".png");
   }
 
 

@@ -15,7 +15,6 @@ var measureController = (function() {
     document.getElementById("reset-button").addEventListener("click", clearAllMeasures);
 
     createNewMeasure();
-    createNewMeasure();
   }
 
 
@@ -50,7 +49,7 @@ var measureController = (function() {
     if (!playbackController.getPlaybackActive()) {
       currentMeasure = 0;
       currentNote = 0;
-      
+
       for (let i = 0; i < numberOfMeasures; i++) {
         resetMeasure(i);
       }
