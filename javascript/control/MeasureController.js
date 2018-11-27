@@ -21,7 +21,7 @@ var measureController = (function() {
 
 
   function createNewMeasure() {
-    if (!playbackController.playbackActive) {
+    if (!playbackController.getPlaybackActive()) {
       measures[numberOfMeasures] = new measureModel.Measure();
       mView[numberOfMeasures] = new measureView.MeasureView(measures[numberOfMeasures]);
       numberOfMeasures++;
@@ -29,31 +29,31 @@ var measureController = (function() {
   }
 
   function removeLastMeasure() {
-    if (numberOfMeasures > 1) {
-      numberOfMeasures--;
-      //If our current note was on the measure we're deleting,
-      //set the currentMeasure and currentNote to the end of the
-      //penultimate measure
-      if (currentMeasure >= numberOfMeasures) {
-        currentMeasure--;
-        currentNote = 8;
+    if (!playbackController.getPlaybackActive()) {
+      if (numberOfMeasures > 1) {
+        numberOfMeasures--;
+        //If our current note was on the measure we're deleting,
+        //set the currentMeasure and currentNote to the end of the
+        //penultimate measure
+        if (currentMeasure >= numberOfMeasures) {
+          currentMeasure--;
+          currentNote = 8;
+        }
+        mView[numberOfMeasures].removeMeasure();
+        measures.splice(numberOfMeasures, 1);
+        mView.splice(numberOfMeasures, 1);
       }
-      mView[numberOfMeasures].removeMeasure();
-      measures.splice(numberOfMeasures, 1);
-      mView.splice(numberOfMeasures, 1);
     }
   }
 
   function clearAllMeasures(event) {
-    clearInterval(playbackController.timerHolder);
-    playbackController.playbackActive = false;
-    playbackController.currentNoteToPlay = 0;
-
-    currentMeasure = 0;
-    currentNote = 0;
-
-    for (let i = 0; i < numberOfMeasures; i++) {
-      resetMeasure(i);
+    if (!playbackController.getPlaybackActive()) {
+      currentMeasure = 0;
+      currentNote = 0;
+      
+      for (let i = 0; i < numberOfMeasures; i++) {
+        resetMeasure(i);
+      }
     }
   }
 

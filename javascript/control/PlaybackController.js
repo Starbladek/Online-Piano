@@ -69,10 +69,15 @@ var playbackController = (function() {
     timerLength = 60000 / bpm;
   }
 
+  function getPlaybackActive() {
+    return playbackActive;
+  }
+
 
 
   return {
-    initializePlaybackControls: initializePlaybackControls
+    initializePlaybackControls: initializePlaybackControls,
+    getPlaybackActive: getPlaybackActive
   };
 
 })();
