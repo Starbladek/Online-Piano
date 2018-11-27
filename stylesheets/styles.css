@@ -71,7 +71,6 @@ h1 {
 }
 
 .measure-display {
-  background-color: rgb(150, 200, 150);
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 25px;
@@ -86,4 +85,6 @@ h1 {
   text-align: center;
   line-height: 50px;
   cursor: default;
+  font-size: 20px;
+  font-weight: bold;
 }

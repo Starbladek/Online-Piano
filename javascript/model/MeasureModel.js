@@ -1,10 +1,16 @@
 var measureModel = (function() {
 
+  let measureLength = 16;
+
   function Measure() {
     this.notes = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < measureLength; i++) {
       this.notes.push(new noteModel.Note("Rest"));
     }
+  }
+
+  function getMeasureLength() {
+    return measureLength;
   }
 
   Measure.prototype.getNotes = function() {
@@ -18,7 +24,8 @@ var measureModel = (function() {
   }
 
   return {
-    Measure: Measure
+    Measure: Measure,
+    getMeasureLength: getMeasureLength
   };
 
 })();

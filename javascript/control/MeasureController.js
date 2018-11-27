@@ -36,7 +36,7 @@ var measureController = (function() {
         //penultimate measure
         if (currentMeasure >= numberOfMeasures) {
           currentMeasure--;
-          currentNote = 8;
+          currentNote = measureModel.getMeasureLength();
         }
         mView[numberOfMeasures].removeMeasure();
         measures.splice(numberOfMeasures, 1);
@@ -59,7 +59,7 @@ var measureController = (function() {
 
 
   function updateMeasure(note) {
-    if (currentNote < 8) {
+    if (currentNote < measureModel.getMeasureLength()) {
       measures[currentMeasure].getNotes()[currentNote] = note;
       mView[currentMeasure].updateMeasure(measures[currentMeasure]);
       currentNote++;
