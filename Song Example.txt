@@ -1,4 +1,4 @@
-BPM: 355
+BPM: 90
 
 E4
 Rest

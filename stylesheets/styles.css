@@ -84,7 +84,7 @@ h1 {
   height: 50px;
   text-align: center;
   line-height: 50px;
-  cursor: default;
+  cursor: pointer;
   font-size: 20px;
   font-weight: bold;
 }

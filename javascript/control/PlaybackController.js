@@ -5,7 +5,9 @@ var playbackController = (function() {
   let timerLength = 1000;
   let timerHolder;
   let playbackActive = false;
+
   let measures = [];
+  let mViews = [];
 
   function initializePlaybackControls() {
     console.log("Initializing playback controls...");
@@ -17,6 +19,8 @@ var playbackController = (function() {
 
   function playNotes(event) {
     measures = measureController.getMeasures();
+    mViews = measureController.getMViews();
+
     if (!playbackActive) {
       console.log("Starting playback!");
       playbackActive = true;
@@ -34,6 +38,7 @@ var playbackController = (function() {
       console.log("Stopping playback.");
       clearInterval(timerHolder);
       playbackActive = false;
+      if (currentNote > 0) uncolorPreviousNote();
       currentNote = 0;
       currentMeasure = 0;
     } else {
@@ -42,6 +47,10 @@ var playbackController = (function() {
   }
 
   function playCurrentNote() {
+    //This conditional is just so we don't try to uncolor index -1 when currentNote = 0
+    if (currentNote > 0) uncolorPreviousNote();
+    mViews[currentMeasure].colorPlaybackNote(currentNote);
+
     if (measures[currentMeasure].getNotes()[currentNote].noteName != "Rest") {
       let sound = new Audio("sounds/" + measures[currentMeasure].getNotes()[currentNote].noteName + ".mp3");
       sound.play();
@@ -49,6 +58,7 @@ var playbackController = (function() {
     currentNote++;
 
     if (currentNote >= measures[currentMeasure].getNotes().length) {
+      uncolorPreviousNote();
       currentNote = 0;
       currentMeasure++;
 
@@ -64,6 +74,13 @@ var playbackController = (function() {
         }
       }
     }
+  }
+
+  function uncolorPreviousNote() {
+    if (measureController.getCurrentMeasure() == currentMeasure && measureController.getCurrentNote() == currentNote - 1)
+      mViews[currentMeasure].colorSelectedNote(currentNote - 1);
+    else
+      mViews[currentMeasure].uncolorPlaybackNote(currentNote - 1);
   }
 
   function calculateTimerLength() {
