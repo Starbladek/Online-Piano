@@ -17,7 +17,7 @@ var measureView = (function() {
       newMeasureSpan.setAttribute("class", "measure-note");
       newMeasureSpan.innerHTML = measureModel.getNotes()[i].noteName;
 
-      if ((i + 1) % 4 == 0)
+      if (i % 4 == 0)
         newMeasureSpan.style.backgroundColor = this.quarterNoteBaseBGColor;
       else
         newMeasureSpan.style.backgroundColor = this.otherNoteBaseBGColor;
@@ -55,7 +55,7 @@ var measureView = (function() {
   };
 
   MeasureView.prototype.uncolorSelectedNote = function(noteIndex) {
-    if ((noteIndex + 1) % 4 == 0)
+    if (noteIndex % 4 == 0)
       this.noteNodes[noteIndex].style.backgroundColor = this.quarterNoteBaseBGColor;
     else
       this.noteNodes[noteIndex].style.backgroundColor = this.otherNoteBaseBGColor;
@@ -66,7 +66,7 @@ var measureView = (function() {
   };
 
   MeasureView.prototype.uncolorPlaybackNote = function(noteIndex) {
-    if ((noteIndex + 1) % 4 == 0)
+    if (noteIndex % 4 == 0)
       this.noteNodes[noteIndex].style.backgroundColor = this.quarterNoteBaseBGColor;
     else
       this.noteNodes[noteIndex].style.backgroundColor = this.otherNoteBaseBGColor;
