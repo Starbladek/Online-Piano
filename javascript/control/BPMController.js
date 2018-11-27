@@ -8,7 +8,7 @@ var bpmController = (function() {
     let bpmCounter = document.getElementById("bpm-counter");
     bpmMin = parseInt(bpmCounter.min);
     bpmMax = parseInt(bpmCounter.max);
-    bpmCounter.value = (bpmMin + bpmMax) / 2;
+    bpmCounter.value = 90;
     document.getElementById("bpm-counter").addEventListener("change", checkIfBPMIsInBounds);
   }
 
